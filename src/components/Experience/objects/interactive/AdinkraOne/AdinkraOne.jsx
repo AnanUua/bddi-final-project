@@ -1,6 +1,6 @@
 import { Html, Plane } from "@react-three/drei"
 import classes from "./AdinkraOne.module.scss"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 
 const initialData = {
   prevX: 0,
@@ -38,9 +38,9 @@ export const AdinkraOne = ({ switchLerp }) => {
   const [data, setData] = useState(initialData)
 
   const handleMDown = (e) => {
-    let prevX = data.currX
-    let prevY = data.currY
     let mouse = getMousePos(canvasRef.current, e)
+    let prevX = data.currX !== 0 ? data.currX : mouse.x
+    let prevY = data.currY !== 0 ? data.currY : mouse.y
     let currX = mouse.x - canvasRef.current.offsetLeft
     let currY = mouse.y - canvasRef.current.offsetTop
     let ctx = canvasRef.current.getContext("2d")
@@ -85,22 +85,19 @@ export const AdinkraOne = ({ switchLerp }) => {
     }
   }
 
-  const handleMUp = (e) => {
+  const handleMUp = () => {
     setData({
       ...data,
       flag: false,
     })
   }
 
-  /*
-  useEffect(() => {
-    const context = canvasRef.current ? canvasRef.current.getContext("2d") : "no"
-    console.log(context)
-    if (canvasRef.current) {
-      draw(canvasRef.current.getContext("2d"))
-    }
-  }, [canvasRef])
-  */
+  const clearCanvas = () => {
+    canvasRef.current
+      .getContext("2d")
+      .clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
+    setData({ ...initialData })
+  }
 
   return (
     <>
@@ -108,10 +105,13 @@ export const AdinkraOne = ({ switchLerp }) => {
         <Html scale={1.2} position={[0, 0, 0.1]} transform>
           <canvas
             onPointerEnter={() => switchLerp(true)}
-            onPointerLeave={() => switchLerp(false)}
+            onPointerLeave={() => {
+              clearCanvas()
+              switchLerp(false)
+            }}
             onMouseDown={(e) => handleMDown(e)}
             onMouseMove={(e) => handleMMove(e)}
-            onMouseUp={(e) => handleMUp(e)}
+            onMouseUp={() => handleMUp()}
             className={classes.canvas}
             ref={canvasRef}
           ></canvas>
