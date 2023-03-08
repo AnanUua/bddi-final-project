@@ -2,6 +2,7 @@ import { Environment, OrbitControls, PerspectiveCamera } from "@react-three/drei
 import { RegionEntranceOneScene } from "./RegionEntranceOneScene"
 import { ScreenQuad } from "@react-three/drei"
 import { HotGround } from "../../effects/HotGround"
+import { AdinkraOne } from "../../objects/interactive/AdinkraOne/AdinkraOne"
 
 export const RegionEntranceOne = () => {
   //<fog attach={"fog"} args={["orange",30,60]} />
@@ -21,6 +22,7 @@ export const RegionEntranceOne = () => {
         position={[-30, 1, 0]}
         rotation={[-Math.PI / 2, Math.PI / 6, Math.PI / 2]}
       />
+      <AdinkraOne />
       <ambientLight intensity={1} />
       <RegionEntranceOneScene />
       <OrbitControls />
