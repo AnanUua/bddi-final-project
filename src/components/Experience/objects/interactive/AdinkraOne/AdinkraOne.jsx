@@ -1,6 +1,7 @@
-import { Html, Plane } from "@react-three/drei"
+import { Html, Plane, Box } from "@react-three/drei"
+import sankofaImage from "../../../../../assets/ChapterOne/sankofa.png"
 import classes from "./AdinkraOne.module.scss"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 const initialData = {
   prevX: 0,
@@ -27,14 +28,15 @@ const draw = (ctx, data) => {
   ctx.beginPath()
   ctx.moveTo(prevX, prevY)
   ctx.lineTo(currX, currY)
-  ctx.strokeStyle = "black"
-  ctx.lineWidth = 2
+  ctx.strokeStyle = "purple"
+  ctx.lineWidth = 3
   ctx.stroke()
   ctx.closePath()
 }
 
 export const AdinkraOne = ({ switchLerp }) => {
   const canvasRef = useRef(null)
+  const [firstDraw, setFirstDraw] = useState(true)
   const [data, setData] = useState(initialData)
 
   const handleMDown = (e) => {
@@ -49,8 +51,8 @@ export const AdinkraOne = ({ switchLerp }) => {
     let dot_flag = true
     if (dot_flag) {
       ctx.beginPath()
-      ctx.fillStyle = "black"
-      ctx.fillRect(currX, currY, 2, 2)
+      ctx.fillStyle = "purple"
+      ctx.fillRect(currX, currY, 3, 3)
       ctx.closePath()
       dot_flag = false
     }
@@ -90,19 +92,73 @@ export const AdinkraOne = ({ switchLerp }) => {
       ...data,
       flag: false,
     })
+    let imgData = canvasRef.current
+      .getContext("2d")
+      .getImageData(0, 0, canvasRef.current.width, canvasRef.current.height, { colorSpace: "srgb" })
+    console.log(imgData)
+    let red = []
+    let green = []
+    let blue = []
+    let type = 0
+    imgData.data.map((color) => {
+      if (type === 0) {
+        red.push(color)
+      } else if (type === 1) {
+        green.push(color)
+      } else {
+        blue.push(color)
+      }
+      type++
+      if (type > 2) {
+        type = 0
+      }
+    })
+    console.log(red)
+    console.log(green)
+    console.log(blue)
+    let blackpixels = 0
+    red.map((color,index) => {
+      if(color === 255) {
+        if(green[index] === 255) {
+          if(blue[index] === 255) {
+            blackpixels++
+          }
+        }
+      }
+    })
+    console.log(blackpixels)
   }
 
   const clearCanvas = () => {
-    canvasRef.current
-      .getContext("2d")
-      .clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
+    let ctx = canvasRef.current.getContext("2d")
+    ctx.restore()
     setData({ ...initialData })
+  }
+
+  const initCanvas = () => {
+    if (canvasRef.current !== null) {
+      let ctx = canvasRef.current.getContext("2d")
+      let img = new Image()
+      img.src = sankofaImage
+
+      img.onload = () => {
+        console.log("chargé")
+        ctx.drawImage(
+          img,
+          canvasRef.current.width / 2 - 50,
+          canvasRef.current.height / 2 - 50,
+          100,
+          100
+        )
+        ctx.save()
+      }
+    }
   }
 
   return (
     <>
       <Plane args={[10, 6, 10, 6]} rotation={[0, Math.PI / 3, 0]} position={[10, 5, -10]}>
-        <Html scale={1.2} position={[0, 0, 0.1]} transform>
+        <Html position={[0, 0, 0.1]} transform>
           <canvas
             onPointerEnter={() => switchLerp(true)}
             onPointerLeave={() => {
@@ -117,6 +173,9 @@ export const AdinkraOne = ({ switchLerp }) => {
           ></canvas>
         </Html>
       </Plane>
+      <Box position={[10, 9, -10]} onClick={() => initCanvas()}>
+        <meshStandardMaterial color="purple" />
+      </Box>
     </>
   )
 }
