@@ -1,12 +1,15 @@
-import { useGLTF } from "@react-three/drei"
-import { Plane } from "../../objects/vehicules/Plane/Plane"
+import { useGLTF, PerspectiveCamera, Environment, OrbitControls, Gltf } from "@react-three/drei"
+import { Model } from "./Scene_1"
 
 export const RegionEntranceOneScene = () => {
-  const obj = useGLTF("assets/scenes/scene_1.glb")
+  //<Gltf src="/assets/scenes/scene_1.glb" />
+
   return (
     <>
-      <primitive object={obj.scene} dispose={null} />
-      <Plane scale={7} position={[0, 8, 0]} rotation={[0, Math.PI / 2, 0]} />
+      <PerspectiveCamera makeDefault />
+      <ambientLight color={"orange"} />
+      <OrbitControls />
+      <Model position={[8, -15, -12]} rotation={[0, 0, 0]} />
     </>
   )
 }
