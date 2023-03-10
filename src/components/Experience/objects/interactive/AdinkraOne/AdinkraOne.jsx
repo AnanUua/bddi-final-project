@@ -1,7 +1,7 @@
 import { Html, Plane, Box } from "@react-three/drei"
 import sankofaImage from "../../../../../assets/ChapterOne/sankofa.png"
 import classes from "./AdinkraOne.module.scss"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 
 const initialData = {
   prevX: 0,
@@ -36,7 +36,6 @@ const draw = (ctx, data) => {
 
 export const AdinkraOne = ({ switchLerp }) => {
   const canvasRef = useRef(null)
-  const [firstDraw, setFirstDraw] = useState(true)
   const [data, setData] = useState(initialData)
 
   const handleMDown = (e) => {
@@ -69,7 +68,7 @@ export const AdinkraOne = ({ switchLerp }) => {
   const handleMMove = (e) => {
     let flag = data.flag
     let mouse = getMousePos(canvasRef.current, e)
-    if (flag) {
+    if (flag === true && e.buttons === 1) {
       let prevX = data.currX
       let prevY = data.currY
       let currX = mouse.x - canvasRef.current.offsetLeft
@@ -87,10 +86,9 @@ export const AdinkraOne = ({ switchLerp }) => {
     }
   }
 
-  const handleMUp = () => {
+  const clearCanvas = () => {
     setData({
-      ...data,
-      flag: false,
+      ...initialData,
     })
     let imgData = canvasRef.current
       .getContext("2d")
@@ -117,27 +115,28 @@ export const AdinkraOne = ({ switchLerp }) => {
     console.log(green)
     console.log(blue)
     let blackpixels = 0
-    red.map((color,index) => {
-      if(color === 255) {
-        if(green[index] === 255) {
-          if(blue[index] === 255) {
+    red.map((color, index) => {
+      if (color === 255) {
+        if (green[index] === 255) {
+          if (blue[index] === 255) {
             blackpixels++
           }
         }
       }
     })
     console.log(blackpixels)
-  }
 
-  const clearCanvas = () => {
-    let ctx = canvasRef.current.getContext("2d")
-    ctx.restore()
-    setData({ ...initialData })
+    if (blackpixels > 2) {
+      console.log("perdu")
+    } else {
+      console.log("gagné")
+    }
   }
 
   const initCanvas = () => {
     if (canvasRef.current !== null) {
       let ctx = canvasRef.current.getContext("2d")
+      ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
       let img = new Image()
       img.src = sankofaImage
 
@@ -150,7 +149,6 @@ export const AdinkraOne = ({ switchLerp }) => {
           100,
           100
         )
-        ctx.save()
       }
     }
   }
@@ -161,13 +159,12 @@ export const AdinkraOne = ({ switchLerp }) => {
         <Html position={[0, 0, 0.1]} transform>
           <canvas
             onPointerEnter={() => switchLerp(true)}
-            onPointerLeave={() => {
-              clearCanvas()
-              switchLerp(false)
-            }}
+            onPointerLeave={() => switchLerp(false)}
             onMouseDown={(e) => handleMDown(e)}
+            onMouseUp={() => {
+              clearCanvas()
+            }}
             onMouseMove={(e) => handleMMove(e)}
-            onMouseUp={() => handleMUp()}
             className={classes.canvas}
             ref={canvasRef}
           ></canvas>
