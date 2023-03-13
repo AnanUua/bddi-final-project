@@ -1,12 +1,25 @@
-import { useState } from "react"
+import { useSelector } from "react-redux"
 import { Experience } from "./components/Experience/Experience"
 import { Introduction } from "./components/Introduction/Introduction"
+import { Interface } from "./components/Interface/Interface"
+import { StartButton } from "./components/StartButton/StartButton"
+import styles from "./App.module.scss"
 
-function App() {
-  const [game, setGame] = useState(false)
+const App = () => {
+  const hasExperienceStarted = useSelector((state) => state.introduction.hasExperienceStarted)
 
   return (
-    <div className="App">{!game ? <Introduction setGame={() => setGame(true)} /> : <Experience />}</div>
+    <main className={styles.container}>
+      {!hasExperienceStarted ? (
+        <Introduction />
+      ) : (
+        <Experience />
+      )}
+      {hasExperienceStarted && <Interface />}
+      {!hasExperienceStarted && (
+        <StartButton text={"Passer l'intro (debug)"} />
+      )}
+    </main>
   )
 }
 

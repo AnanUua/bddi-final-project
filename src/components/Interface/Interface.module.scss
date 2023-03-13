@@ -1,0 +1,89 @@
+.meta {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 50%;
+
+  .buttons,
+  .spots {
+    button {
+      color: #ffffff;
+      background-color: #000000cc;
+      padding: 1rem 2rem;
+      margin-right: 2rem;
+      margin-bottom: 2rem;
+
+      &.active {
+        background-color: white;
+        pointer-events: none;
+        color: #000000;
+      }
+    }
+  }
+}
+
+button {
+  cursor: pointer;
+
+  &.more {
+    margin-top: 2rem;
+    color: #808080;
+    width: 100%;
+  }
+}
+
+hr {
+  margin-bottom: 2rem;
+  height: 0.1rem;
+  background-color: #ffffff;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+.dialogue {
+  max-width: 100%;
+  width: 80rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2rem;
+  position: absolute;
+  bottom: 2rem;
+  background-color: #000000cc;
+
+  .narrator {
+    font-family: "Spectral SC", sans-serif;
+    letter-spacing: 0.2rem;
+    font-weight: 400;
+
+    &--innerVoice {
+      color: #b958ff;
+    }
+
+    &--npc {
+      color: #ffb24d;
+    }
+  }
+}
+
+.options {
+  margin-top: 2rem;
+  border-top: 0.2rem solid #ffffff;
+  padding-top: 2rem;
+  color: #ffb24d;
+
+  button {
+    margin-right: 2rem;
+  }
+
+  button:hover {
+    color: #ff9d1d;
+  }
+}
+
+.test {
+  position: absolute;
+  z-index: 20;
+  color: white;
+}

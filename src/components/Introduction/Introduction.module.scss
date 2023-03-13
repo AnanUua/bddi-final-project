@@ -1,21 +1,74 @@
-.card {
-  display: flex;
-  gap: 5px;
-  button {
-    color: white;
-    border: 0.1rem solid white;
-    padding: 1rem 2rem;
-    margin-right: 2rem;
-    margin-bottom: 2rem;
-  
-    &.active {
-      background-color: white;
-      pointer-events: none;
-      color: black;
-    }
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+
+.startButton {
+  display: block;
+  margin: 0 auto;
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 30rem;
+  padding: 1rem;
+  background-color: rgb(255, 178, 77);
+  cursor: pointer;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+
+  &:hover {
+    background-color: rgb(255, 157, 29);
   }
 }
 
-.subTitle {
-  margin-bottom: 1rem;
+.date {
+  color: grey;
+}
+
+.baseline {
+  margin-top: 2rem;
+}
+
+.options {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.option {
+  color: rgb(255, 178, 77);
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 2rem;
+
+  &:hover {
+    color: rgb(255, 157, 29);
+  }
+}
+
+.nextButton {
+  display: block;
+  color: grey;
+  margin-top: 2rem;
+  width: 100%;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.footer {
+  text-align: center;
 }

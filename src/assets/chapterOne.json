@@ -1,0 +1,80 @@
+[
+  {
+    "name": "Entrée de la région",
+    "voiceover": [
+      {
+        "text": "Le soleil trône au-dessus de toi, dans un ciel bleu moucheté de résidus opalins. Loin à l’ouest, tu détailles une mine surplombée d’un large panneau rouillant cliquetant au gré du vent. À l’est, des centaines de pierre se réunissent pour former des cercles. Au sud-ouest, les contours brouillés d’un village se dessinent dans l’air brûlant du désert.",
+        "emitter": "narrator"
+      }
+    ],
+    "spots": []
+  },
+  {
+    "name": "Cercles mégalithiques",
+    "voiceover": [],
+    "spots": [
+      {
+        "index": 0,
+        "label": "Cercles de pierre",
+        "spotVoiceover": [
+          {
+            "text": "Une colonie de mégalithes a choisi de s’établir ici, sur un site grand de plusieurs hectares. Des centaines de piliers de latérite taillée forment des cercles et se regardent les uns les autres. Ils attendent peut-être la fin du monde.",
+            "emitter": "narrator"
+          },
+          {
+            "text": "Ces pierres surmontent des sépultures. Laisse-moi reformuler : tu te trouves dans un cimetière, et sous tes pieds reposent des centaines — peut-être même des *milliers* — d’habitants du Nyalaandée. Leur corps n’est  peut-être plus, mais leur âme est toujours ici.",
+            "emitter": "innerVoice"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ancienne mine de phosphate",
+    "voiceover": [],
+    "spots": [
+      {
+        "index": 0,
+        "label": "Entrée de la mine",
+        "spotVoiceover": [
+          {
+            "text": "Tu es accueilli(e) par les restes d’un portail rouillé que le vent fait cliqueter par cycles, et sur lequel tu réussis à lire “Gaïa Minerals Group”. La rouille est en train d’oxyder les barreaux des échafaudages.",
+            "emitter": "narrator"
+          },
+          {
+            "text": "Tu sens le vent s’engouffrer à l’intérieur.",
+            "emitter": "innerVoice"
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "label": "Excavatrice abandonnée",
+        "spotVoiceover": [
+          {
+            "text": "Un engin colossal monté sur une paire de chenilles envahit la mine à ciel ouvert. C’est une excavatrice géante à godets. Elle n’a pas été utilisée depuis de *nombreuses* années.",
+            "emitter": "narrator"
+          },
+          {
+            "text": "Tu te sens tout(e) petit(e) à côté de cette machine.",
+            "emitter": "innerVoice"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Route vers la savane",
+    "voiceover": [
+      {
+        "text": "Un baobab singulier et trapu apparaît, dépliant ses couronnes vertes en-dessous du ciel. Perchées sur une branche, deux perruches aux couleurs vives te dévisagent placidement.",
+        "emitter": "narrator"
+      },
+      {
+        "text": "L’arbre à palabres. Une invitation à prendre connaissance d’un passé qui n’est pas le tien. Qui est celui ou celle qui est venu(e) avant toi ?",
+        "emitter": "innerVoice"
+      }
+    ],
+    "spots": []
+  }
+]
